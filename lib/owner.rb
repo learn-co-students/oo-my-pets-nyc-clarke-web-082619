@@ -6,11 +6,9 @@ class Owner
     @name = name
     @species = "human"
     @@all << self
-    @cats = []
-    @dogs = []
   end
   def say_species
-    "I am a human."
+    "I am a #{self.species}."
   end
   def self.all
     @@all
@@ -32,14 +30,22 @@ class Owner
 
 
   def walk_dogs 
-    @dogs = @dogs.map do |dog| 
+    dogs.map do |dog| 
       dog.mood = "happy"
       dog
     end
   end
 
+    def cats
+      Cat.all.select {|cat| cat.owner == self}
+    end
+
+    def dogs
+      Dog.all.select {|dog| dog.owner == self}
+    end
+
     def feed_cats
-      @cats = @cats.map do |cat| 
+      cats.map do |cat| 
         cat.mood = "happy"
         cat
       end
@@ -60,6 +66,14 @@ class Owner
       end
       pets.clear
     end
+
+    # def cats
+    #   Cat.all.select {|cat| cat.owner == self}
+    # end
+
+    # def dogs
+    #   Cat.all.select {|cat| cat.owner == self}
+    # end
 
 end
 
